@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Descubre el menú de hoy y los ingredientes de tu plato principal."
+    />
+    <title>¿Qué hay de comer hoy?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="menu-page">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Menú de hoy, inicio">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>¿Qué hay de comer hoy?</span>
+        </a>
+        <p class="date-label" id="today-date">Hoy</p>
+      </header>
+
+      <section class="dish-layout" aria-labelledby="meal-title">
+        <article class="dish-card" id="meal-card">
+          <div
+            class="dish-image"
+            role="img"
+            aria-label="Pasta cremosa con verduras"
+          >
+            <span class="image-badge" data-meal-type="Comida">Comida</span>
+            <span class="dish-symbol" aria-hidden="true">🍽️</span>
+          </div>
+          <div class="dish-content">
+            <div class="dish-heading">
+              <div>
+                <p class="section-label">Plato principal</p>
+                <h2 id="meal-title">Cargando el menú...</h2>
+              </div>
+            </div>
+            <div class="card-ingredients">
+              <p class="section-label">Ingredientes de la comida</p>
+              <ul class="dish-ingredient-list" id="meal-ingredient-list">
+                <li>Cargando ingredientes...</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card dinner-card" id="dinner-card">
+          <div class="dish-image" role="img" aria-label="Cena de hoy">
+            <span class="image-badge" data-meal-type="Cena">Cena</span>
+            <span class="dish-symbol" aria-hidden="true">🌙</span>
+          </div>
+          <div class="dish-content">
+            <div class="dish-heading">
+              <div>
+                <p class="section-label">Plato principal + acompañamiento</p>
+                <h2 id="dinner-title">Cargando la cena...</h2>
+              </div>
+            </div>
+            <div class="card-ingredients">
+              <p class="section-label">Ingredientes de la cena</p>
+              <ul class="dish-ingredient-list" id="dinner-ingredient-list">
+                <li>Cargando ingredientes...</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <aside class="ingredients-panel" aria-labelledby="ingredients-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-label">Lo que necesitas</p>
+              <h2 id="ingredients-title">Ingredientes</h2>
+            </div>
+            <span class="ingredient-count" id="ingredient-count">0</span>
+          </div>
+          <ul class="ingredient-list" id="ingredient-list">
+            <li>Cargando ingredientes...</li>
+          </ul>
+          <p class="panel-note" id="sheet-status" role="status">
+            Cargando ingredientes...
+          </p>
+        </aside>
+      </section>
+
+      <button class="next-day-button" id="next-day-button" type="button" disabled>
+        ¿Y mañana?
+      </button>
+
+      <div id="future-days"></div>
+
+      <footer class="site-footer">
+        <span>Comer bien empieza con una buena idea.</span>
+        <span aria-hidden="true">—</span>
+        <span>Buen provecho</span>
+      </footer>
+    </main>
+  </body>
+</html>
