@@ -91,16 +91,48 @@
         </aside>
       </section>
 
-      <button class="next-day-button" id="next-day-button" type="button" disabled>
+      <section
+        class="weekend-message weekend-today"
+        id="weekend-notice"
+        aria-live="polite"
+        hidden
+      >
+        <span class="weekend-icon" aria-hidden="true">🎉</span>
+        <p>Fin de semana</p>
+        <span>El menú continúa el lunes.</span>
+      </section>
+
+      <button
+        class="next-day-button"
+        id="next-day-button"
+        type="button"
+        disabled
+      >
         ¿Y mañana?
       </button>
 
       <div id="future-days"></div>
 
       <footer class="site-footer">
-        <span>Comer bien empieza con una buena idea.</span>
-        <span aria-hidden="true">—</span>
-        <span>Buen provecho</span>
+        <div class="footer-copy">
+          <span>Buen provecho!</span>
+          <span aria-hidden="true">—</span>
+          <a
+            class="source-link"
+            href="https://docs.google.com/spreadsheets/d/1r-9gv9unPgfm7iiEfWHz4DMtuc_NyolIajzAgjkkbMI/edit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver datos en Excel
+          </a>
+        </div>
+        <div class="footer-actions" aria-label="Animaciones del menú">
+          <button class="letter-button" type="button" data-icon="🏄" aria-label="Lanzar tabla de surf" title="Tabla de surf">P</button>
+          <button class="letter-button" type="button" data-icon="👑" aria-label="Lanzar corona" title="Corona">M</button>
+          <button class="letter-button" type="button" data-icon="🏀" aria-label="Lanzar pelota de baloncesto" title="Pelota de baloncesto">J</button>
+          <button class="letter-button" type="button" data-icon="⚽" aria-label="Lanzar pelota de fútbol" title="Pelota de fútbol">N</button>
+          <button class="letter-button" type="button" data-icon="🍼" aria-label="Lanzar chupete" title="Chupete">A</button>
+        </div>
       </footer>
     </main>
   </body>

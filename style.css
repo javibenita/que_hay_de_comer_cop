@@ -14,6 +14,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   background: var(--cream);
@@ -150,6 +154,10 @@ h2 {
 
 .dish-card[data-category="verdura"] .dish-image {
   background: #a9c2a4;
+}
+
+.dish-card[data-category="pizza"] .dish-image {
+  background: #d98e62;
 }
 
 .dish-card[data-category="otros"] .dish-image {
@@ -362,6 +370,10 @@ h2 {
   text-align: center;
 }
 
+.weekend-today {
+  margin-top: 24px;
+}
+
 .weekend-icon {
   font-size: 3rem;
 }
@@ -397,11 +409,69 @@ h2 {
 }
 
 .site-footer {
-  justify-content: flex-start;
-  gap: 12px;
+  gap: 24px;
   padding-top: 72px;
   color: var(--muted);
   font-size: 0.75rem;
+}
+
+.footer-copy,
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-actions {
+  margin-left: auto;
+  gap: 8px;
+}
+
+.letter-button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--sage-dark);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--sage-dark);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.letter-button:hover,
+.letter-button:focus-visible {
+  background: var(--sage-dark);
+  color: var(--paper);
+  transform: translateY(-3px);
+}
+
+.flight-icon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  pointer-events: none;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  will-change: transform;
+}
+
+.source-link {
+  color: var(--sage-dark);
+  font-weight: 700;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.source-link:hover,
+.source-link:focus-visible {
+  color: var(--coral);
 }
 
 @media (max-width: 760px) {
@@ -425,6 +495,10 @@ h2 {
   .site-footer {
     flex-wrap: wrap;
     padding-top: 48px;
+  }
+
+  .footer-actions {
+    margin-left: 0;
   }
 }
 

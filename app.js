@@ -1,6 +1,8 @@
 const dateElement = document.querySelector("#today-date");
 const mealTitle = document.querySelector("#meal-title");
 const dinnerTitle = document.querySelector("#dinner-title");
+const dishLayout = document.querySelector(".dish-layout");
+const weekendNotice = document.querySelector("#weekend-notice");
 const mealCard = document.querySelector("#meal-card");
 const dinnerCard = document.querySelector("#dinner-card");
 const mealIngredientList = document.querySelector("#meal-ingredient-list");
@@ -130,6 +132,7 @@ function applyCategoryStyle(card, primaryEntry, secondaryEntry = null) {
     PESCADO: "🐟",
     LEGUMBRE: "🫘",
     VERDURA: "🥦",
+    PIZZA: "🍕",
     OTROS: "🍽️",
   };
   const colorByCategory = {
@@ -139,6 +142,7 @@ function applyCategoryStyle(card, primaryEntry, secondaryEntry = null) {
     PESCADO: "#8dbac1",
     LEGUMBRE: "#b1a27d",
     VERDURA: "#a9c2a4",
+    PIZZA: "#d98e62",
     OTROS: "#a7a9a6",
   };
   const categories = [primaryCategory, secondaryCategory].filter(Boolean);
@@ -421,6 +425,16 @@ async function loadTodayMenu() {
       dinnerIndex: createIngredientIndex(dinnerRows),
       sideIndex: createIngredientIndex(sideRows),
     };
+    const today = new Date();
+    if (isWeekend(today)) {
+      dishLayout.hidden = true;
+      weekendNotice.hidden = false;
+      nextDayOffset = today.getDay() === 6 ? 3 : 1;
+      nextDayButton.disabled = false;
+      sheetStatus.textContent = "";
+      return;
+    }
+
     const menu = getMenuForDate(new Date(), sheetData);
     const { meal, dinner, side, mealEntry, dinnerEntry, sideEntry } = menu;
     const { mealIngredients, dinnerIngredients } = getMenuIngredients(menu);
@@ -450,3 +464,58 @@ dateElement.textContent = new Intl.DateTimeFormat("es-ES", {
 }).format(new Date());
 loadTodayMenu();
 nextDayButton.addEventListener("click", () => appendNextDay(nextDayButton));
+
+const flightSides = ["left", "right", "top", "bottom"];
+
+function getFlightPoint(side, width, height) {
+  const margin = 90;
+  if (side === "left") return { x: -margin, y: Math.random() * height };
+  if (side === "right") return { x: width + margin, y: Math.random() * height };
+  if (side === "top") return { x: Math.random() * width, y: -margin };
+  return { x: Math.random() * width, y: height + margin };
+}
+
+function launchIcon(icon) {
+  const flightIcon = document.createElement("span");
+  flightIcon.className = "flight-icon";
+  flightIcon.textContent = icon;
+  flightIcon.setAttribute("aria-hidden", "true");
+  document.body.append(flightIcon);
+
+  const startSide = flightSides[Math.floor(Math.random() * flightSides.length)];
+  let endSide = flightSides[Math.floor(Math.random() * flightSides.length)];
+  while (endSide === startSide) {
+    endSide = flightSides[Math.floor(Math.random() * flightSides.length)];
+  }
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const start = getFlightPoint(startSide, width, height);
+  const end = getFlightPoint(endSide, width, height);
+  const middle = {
+    x: (start.x + end.x) / 2 + (Math.random() - 0.5) * width * 0.25,
+    y: (start.y + end.y) / 2 + (Math.random() - 0.5) * height * 0.25,
+  };
+  const animation = flightIcon.animate(
+    [
+      {
+        transform: `translate(${start.x}px, ${start.y}px) rotate(-25deg) scale(0.8)`,
+      },
+      {
+        transform: `translate(${middle.x}px, ${middle.y}px) rotate(360deg) scale(1.15)`,
+      },
+      {
+        transform: `translate(${end.x}px, ${end.y}px) rotate(720deg) scale(0.8)`,
+      },
+    ],
+    {
+      duration: 1500 + Math.random() * 700,
+      easing: "cubic-bezier(0.45, 0.05, 0.55, 0.95)",
+    },
+  );
+  animation.finished.finally(() => flightIcon.remove());
+}
+
+document.querySelectorAll(".letter-button").forEach((button) => {
+  button.addEventListener("click", () => launchIcon(button.dataset.icon));
+});
